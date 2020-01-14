@@ -6,7 +6,6 @@ import java.awt.Robot
 import java.awt.Toolkit
 import java.awt.image.BufferedImage
 import java.io.ByteArrayOutputStream
-import java.io.File
 import javax.imageio.ImageIO
 import kotlin.test.assertTrue
 

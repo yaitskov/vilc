@@ -7,6 +7,7 @@ import kotlin.test.assertTrue
 class ReadMouseCursorTest {
   @Test
   fun read() {
+    MouseInfo.getNumberOfButtons()
     val loc = MouseInfo.getPointerInfo().location;
     assertTrue(loc.x >= 0, "x < 0 $loc")
     assertTrue(loc.y >= 0, "x < 0 $loc")

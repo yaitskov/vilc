@@ -1,2 +1,4 @@
 .idea
 target
+*.bmp
+dependency-reduced-pom.xml
