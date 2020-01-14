@@ -20,7 +20,7 @@ class App {
 
   fun makeStripe(x: Int, y: Int) {
     val screenRect = Rectangle(Toolkit.getDefaultToolkit().getScreenSize())
-    val stripeWidth = 200
+    val stripeWidth = 100
     val shotRect = Rectangle(
         10,
         Math.max(0, y - stripeWidth / 2),
