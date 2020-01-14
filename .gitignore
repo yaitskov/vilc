@@ -2,3 +2,5 @@
 target
 *.bmp
 dependency-reduced-pom.xml
+hs*.log
+extracted.txt
