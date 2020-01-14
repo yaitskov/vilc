@@ -1,22 +1,26 @@
 package org.vilc
 
+import java.awt.Desktop
 import java.awt.Rectangle
 import java.awt.Robot
 import java.awt.Toolkit
 import java.awt.image.BufferedImage
-import java.io.ByteArrayOutputStream
-import java.nio.ByteBuffer
 import java.nio.file.Files
 import java.nio.file.Paths
 
-class App(val ocr: Ocr) {
+class App(val ocr: Ocr, val interpreter: OcrTextInterpreter) {
   fun onClickTarget(cursorX: Int, cursorY: Int) {
     val stripe = makeStripe(cursorX, cursorY)
     val buffer = ImageConverter.bufferedImageToByteBuffer(stripe)
 
-    Files.write(Paths.get("extracted.txt"),
-        ocr.pictureToText(buffer, stripe.width, stripe.height)
-            .toByteArray())
+    val ocrText = ocr.pictureToText(buffer, stripe.width, stripe.height)
+    val mayBeUrl = interpreter.extractUrl(ocrText)
+    if (mayBeUrl.isPresent) {
+      if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+        Desktop.getDesktop().browse(mayBeUrl.get().toURI());
+      }
+    }
+    Files.write(Paths.get("extracted.txt"), "url $mayBeUrl from:\n$ocrText".toByteArray())
   }
 
   fun makeStripe(x: Int, y: Int): BufferedImage {
@@ -28,10 +32,5 @@ class App(val ocr: Ocr) {
         screenRect.width - 10,
         stripeWidth)
     return Robot().createScreenCapture(shotRect)
-    //val stream = ByteArrayOutputStream()
-    // ImageIO.write(capture, "bmp", stream)
-    //val bytes = stream.toByteArray()
-    // Files.write(Paths.get("current.bmp"), bytes)
-    //return Stripe(shotRect, ByteBuffer.wrap(bytes))
   }
 }

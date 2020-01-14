@@ -16,7 +16,7 @@ fun main() {
 
   val ocr = Ocr(tessApi)
 
-  val app = App(ocr)
+  val app = App(ocr, OcrTextInterpreterFactory.create())
   GlobalScreen.registerNativeHook()
   GlobalScreen.addNativeMouseListener(MouseClickListener(app))
 
