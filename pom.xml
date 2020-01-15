@@ -12,6 +12,7 @@
     <properties>
         <kotlin.version>1.3.50</kotlin.version>
         <sure.fire.version>2.20</sure.fire.version>
+        <opencv.version>4.1.2-1.5.2</opencv.version>
     </properties>
 
     <build>
@@ -37,6 +38,11 @@
                                     </excludes>
                                 </filter>
                             </filters>
+<!--                            <artifactSet>-->
+<!--                                <excludes>-->
+<!--                                    <exclude></exclude>-->
+<!--                                </excludes>-->
+<!--                            </artifactSet>-->
                             <!--<minimizeJar>true</minimizeJar>-->
                             <transformers>
                                 <transformer
@@ -104,6 +110,66 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
             <version>${kotlin.version}</version>
+        </dependency>
+
+<!--        <classifier>windows-x86_64</classifier>-->
+        <!-- Additional dependencies required to use CUDA and cuDNN -->
+<!--        <dependency>-->
+<!--            <groupId>org.bytedeco</groupId>-->
+<!--            <artifactId>opencv-platform-gpu</artifactId>-->
+<!--            <version>${opencv.version}</version>-->
+<!--        </dependency>-->
+
+<!--        &lt;!&ndash; Additional dependencies to use bundled CUDA and cuDNN &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.bytedeco</groupId>-->
+<!--            <artifactId>cuda-platform-redist</artifactId>-->
+<!--            <version>10.2-7.6-1.5.2</version>-->
+<!--        </dependency>-->
+
+<!--        &lt;!&ndash; Additional dependencies to use bundled full version of MKL &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.bytedeco</groupId>-->
+<!--            <artifactId>mkl-platform-redist</artifactId>-->
+<!--            <version>2019.5-1.5.2</version>-->
+<!--        </dependency>-->
+
+<!--        &lt;!&ndash; Optional dependencies to load the Python module &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.bytedeco</groupId>-->
+<!--            <artifactId>numpy-platform</artifactId>-->
+<!--            <version>1.17.3-1.5.2</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.bytedeco</groupId>-->
+<!--            <artifactId>opencv</artifactId>-->
+<!--            <version>4.1.2-1.5.2</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.bytedeco</groupId>-->
+<!--            <artifactId>javacv</artifactId>-->
+<!--            <version>1.5.2</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.bytedeco.javacpp-presets</groupId>-->
+<!--            <artifactId></artifactId>-->
+<!--            <version>4.0.1-1.4.4</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.bytedeco</groupId>-->
+<!--            <artifactId>opencv-platform-gpu</artifactId>-->
+<!--            <version>4.1.2-1.5.2</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>opencv-platform</artifactId>
+            <version>${opencv.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bytedeco.javacpp-presets</groupId>
+            <artifactId>opencv-platform</artifactId>
+            <version>4.0.1-1.4.4</version>
         </dependency>
         <dependency>
             <groupId>com.1stleg</groupId>

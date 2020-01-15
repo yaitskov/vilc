@@ -8,9 +8,11 @@ import java.awt.image.BufferedImage
 import java.nio.file.Files
 import java.nio.file.Paths
 
-class App(val ocr: Ocr, val interpreter: OcrTextInterpreter) {
+class App(val ocr: Ocr,
+          val stripper: Stripper,
+          val interpreter: OcrTextInterpreter) {
   fun onClickTarget(cursorX: Int, cursorY: Int) {
-    val stripe = makeStripe(cursorX, cursorY)
+    val stripe = stripper.makeStripe(cursorX, cursorY)
     val buffer = ImageConverter.bufferedImageToByteBuffer(stripe)
 
     val ocrText = ocr.pictureToText(buffer, stripe.width, stripe.height)
@@ -21,16 +23,5 @@ class App(val ocr: Ocr, val interpreter: OcrTextInterpreter) {
       }
     }
     Files.write(Paths.get("extracted.txt"), "url $mayBeUrl from:\n$ocrText".toByteArray())
-  }
-
-  fun makeStripe(x: Int, y: Int): BufferedImage {
-    val screenRect = Rectangle(Toolkit.getDefaultToolkit().getScreenSize())
-    val stripeWidth = 100
-    val shotRect = Rectangle(
-        10,
-        Math.max(0, y - stripeWidth / 2),
-        screenRect.width - 10,
-        stripeWidth)
-    return Robot().createScreenCapture(shotRect)
   }
 }
